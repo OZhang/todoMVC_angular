@@ -7,6 +7,7 @@ import { NewTodoComponent } from './component/new-todo/new-todo.component';
 import { MainComponent } from './component/main/main.component';
 import { TodoListComponent } from './component/main/todo-list/todo-list.component';
 import { TodoItemComponent } from './component/main/todo-item/todo-item.component';
+import { FooterComponent } from './component/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { TodoItemComponent } from './component/main/todo-item/todo-item.componen
     NewTodoComponent,
     MainComponent,
     TodoListComponent,
-    TodoItemComponent
+    TodoItemComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

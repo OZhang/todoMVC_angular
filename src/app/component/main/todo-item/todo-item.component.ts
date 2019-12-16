@@ -26,7 +26,7 @@ export class TodoItemComponent implements OnInit {
   saveedited(editedtodo): void {
     this.Todo.title = editedtodo.value;
     this.isediting = false;
-    this.todoService.updateLocalStorage();
+    this.update();
   }
 
   cancelEditing() {
@@ -39,6 +39,9 @@ export class TodoItemComponent implements OnInit {
     }else{
       this.saveedited(editedtodo);
     }
+  }
 
+  update(){
+    this.todoService.updateLocalStorage();
   }
 }
