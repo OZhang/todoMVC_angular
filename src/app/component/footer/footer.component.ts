@@ -12,8 +12,6 @@ export class FooterComponent implements OnInit {
   constructor(private todoService: TodoService) { }
 
   ngOnInit() {
-    // this.todoService.countleft().subscribe(a => this.left = a);
-    // this.left = this.todoService.countleft();
+    this.todoService.todoList.subscribe(() => this.left = this.todoService.countleft());
   }
-
 }

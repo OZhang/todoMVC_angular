@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Todo } from '../model/todo';
-import { Observable } from 'rxjs';
+import { Observable, of, Subject, BehaviorSubject } from 'rxjs';
 
 const key: string = "todos";
 
@@ -8,56 +8,41 @@ const key: string = "todos";
   providedIn: 'root'
 })
 export class TodoService {
-  private todos: Observable<Todo[]> = new Observable<Todo[]>();
-
+  private todos: Todo[] = [];
+  public todoList: Subject<Todo[]>;
   constructor() {
+    const storedTodos = localStorage.getItem(key)
+    console.log("storedTodos", storedTodos);
+    if (storedTodos == null || storedTodos.length === 0) {
+      localStorage.setItem(key, JSON.stringify(this.todos));
+      console.log("this.todos", this.todos);
+    }
+    else {
+      this.todos = JSON.parse(storedTodos);
+      console.log("this.todos", this.todos);
+    }
+
+    this.todoList = new BehaviorSubject<Todo[]>(this.todos);
   }
-  remove(todo: any) {
-    // const index = this.todos.subscribe({
-    //   next(n) { console.log(n)},
-    //   complete() {console.log('Finished')}
-    // });
-    
-    
-    
-    // ({t => tindexOf(todo)});
-    // if (index != -1){
-    //   this.todos.splice(index,1);
-    // }
-    // this.updateLocalStorage();
+
+  remove(todo: Todo) {
+    const index = this.todos.indexOf(todo);
+    if (index != -1) {
+      this.todos.splice(index, 1);
+    }
+    this.todoList.next(this.todos);
+    this.updateLocalStorage();
   }
   addTodo(title: string) {
-    // this.todos.push(new Todo(title));
-    // this.updateLocalStorage();
+    this.todos.push(new Todo(title));
+    this.todoList.next(this.todos);
+    this.updateLocalStorage();
   }
-  getTodos(): Observable<Todo[]> {
-    const storedTodos = localStorage.getItem(key)
-    // JSON.parse();
-    // console.log("storedTodos",storedTodos);
-    if (storedTodos == null || storedTodos.length === 0)
-    {
-      const todos: Todo[] = [];
-      localStorage.setItem(key,JSON.stringify(this.todos));
-      return Observable.create(todos);
-    }
-    else{
-      const todos = JSON.parse(storedTodos);
-      // console.log("todos",todos);
-      const returnValue = Observable.create(todos);
-      // console.log("returnValue",returnValue);
-      return returnValue;
-    }
-    // this.todos = [
-    //   new Todo("Taste JavaScript"),
-    //   new Todo("Buy a unicorn"),
-    // ];
 
-  }
-  updateLocalStorage(){
+  updateLocalStorage() {
     localStorage.setItem(key, JSON.stringify(this.todos));
   }
   countleft(): number {
-    return 0;// this.todos.filter(todo => !todo.isCompleted).length;
+    return this.todos.filter(todo => !todo.isCompleted).length;
   }
-
 }

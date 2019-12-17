@@ -14,29 +14,13 @@ export class TodoListComponent implements OnInit {
 
   ngOnInit() {
     console.log("TodoListComponent.ngOnInit");
-    this.todoService.getTodos().subscribe((t) => {
+    this.todoService.todoList.subscribe((t) => {
       this.todos = t;
+      console.log("this.todoService.getTodos()", this.todos.length);
     });
-
-
-
-    // .subscribe({
-    //   next(todos) {
-
-    //   },
-    //   complete() {console.log("complete")}
-    // })
-
-    // this.todoService.getTodos().subscribe({
-    //   next(todos) {console.log("Todo[]",todos)},
-    //   completed(todos){
-    //   this.todos = todos as Todo[]}
-    // });
-    // console.log(" this.todos= ", this.todos);
   }
 
   remove(todo): void {
-    console.log(todo);
     this.todoService.remove(todo);
   }
 
