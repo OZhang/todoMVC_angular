@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NewTodoComponent } from './component/new-todo/new-todo.component';
-import { MainComponent } from './component/main/main.component';
 import { TodoListComponent } from './component/main/todo-list/todo-list.component';
 import { TodoItemComponent } from './component/main/todo-item/todo-item.component';
 import { FooterComponent } from './component/footer/footer.component';
@@ -13,7 +12,6 @@ import { FooterComponent } from './component/footer/footer.component';
   declarations: [
     AppComponent,
     NewTodoComponent,
-    MainComponent,
     TodoListComponent,
     TodoItemComponent,
     FooterComponent

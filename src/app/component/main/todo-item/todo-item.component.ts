@@ -10,7 +10,6 @@ import { TodoService } from 'src/app/service/todo.service';
 export class TodoItemComponent implements OnInit {
   @Input() public Todo: Todo;
   @Output() removeTodo: EventEmitter<Todo> = new EventEmitter();
-  // @Output() updatedTodo: EventEmitter<Todo, string> = new EventEmitter();
   public isediting: boolean;
   constructor(private todoService: TodoService) { }
 
@@ -42,6 +41,6 @@ export class TodoItemComponent implements OnInit {
   }
 
   update(){
-    this.todoService.updateLocalStorage();
+    this.todoService.update();
   }
 }

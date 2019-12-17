@@ -1,17 +1,16 @@
 <footer class="footer">
     <span class="todo-count"><strong>{{left}}</strong> item left</span>
-    <!-- Remove this if you don't implement routing -->
     <ul class="filters">
         <li>
-            <a class="selected" href="#/">All</a>
+            <a [routerLink]="['']" [class.selected]="currentStatus == ''">All</a>
         </li>
         <li>
-            <a href="#/active">Active</a>
+            <a [routerLink]="['', 'active']" [class.selected]="currentStatus == 'active'">Active</a>
         </li>
         <li>
-            <a href="#/completed">Completed</a>
+            <a [routerLink]="['', 'completed']" [class.selected]="currentStatus == 'completed'">Completed</a>
         </li>
     </ul>
     <!-- Hidden if no completed items are left ↓ -->
-    <button class="clear-completed">Clear completed</button>
+    <button class="clear-completed" *ngIf="completed > 0" (click)="clearCompleted()">Clear completed</button>
 </footer>

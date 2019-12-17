@@ -1,6 +1,14 @@
-<ul class="todo-list">
-    <!-- <li [ngClass]="{'completed': todo.isCompleted}" *ngFor="let todo of todos">
-        <app-todo-item [Todo]="todo" (removeTodo)="remove(todo)"></app-todo-item> 
-    </li>-->
-    <app-todo-item *ngFor="let todo of todos" [Todo]="todo" (removeTodo)="remove(todo)"></app-todo-item>
-</ul>
+<section>
+    <header class="header">
+        <h1>todos</h1>
+        <app-new-todo></app-new-todo>
+    </header>
+</section>
+<section class="main">
+    <input type="checkbox" class="toggle-all" id="toggle-all" (change)="checkchanged()">
+    <label for="toggle-all">Mark all as complete</label>
+    <ul class="todo-list">
+        <app-todo-item *ngFor="let todo of todos" [Todo]="todo" (removeTodo)="remove(todo)"></app-todo-item>
+    </ul>
+</section>
+<app-footer></app-footer>
